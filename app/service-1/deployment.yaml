@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-1
+  namespace: bookinfo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-1
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: service-1
+    spec:
+      containers:
+      - name: service-1
+        image: maiawayg/service-1:0.0.1-snapshot
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SERVICE_2_URL
+          value: "http://service-2.bookinfo.svc.cluster.local:8080"
+        - name: APP_PORT
+          value: "8080"
