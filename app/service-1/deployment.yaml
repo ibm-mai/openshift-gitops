@@ -26,3 +26,5 @@ spec:
           value: "http://service-2.bookinfo.svc.cluster.local:8080"
         - name: APP_PORT
           value: "8080"
+        - name: ADD_NEW_ENV
+          value: "TEST"      
